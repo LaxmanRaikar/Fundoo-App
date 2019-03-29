@@ -1,0 +1,213 @@
+{% extends "fundoo/dash_board.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<script type="text/javascript" src="{% static 'JS/createnote.js' %}"></script>
+<script>
+$(document).ready(function(){
+     $("#close-btn").click(function (e){
+             $("#note-box").hide();
+             $("#show-note-box").show();
+        });
+});
+</script>
+
+<div class="create-note centered " id="show-note-box" style=" ">
+    <div class="card " id="createnote">
+      <div class="card-body" id="take-a-note">
+          Take a note..
+          <span style="float: right;">
+              <button type="submit" class="btn btn-light " id="checkbox" ><span><ion-icon name="checkbox"></ion-icon></span></button>
+              <button type="submit" class="btn btn-light " id="brush" ><span><ion-icon name="brush"></ion-icon></span></button>
+              <button type="submit" class="btn btn-light " id="photos" ><span><ion-icon name="photos"></ion-icon></span></button>
+           </span>
+
+      </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+
+
+<div class="create-note " id="note-box" style="display:none;">
+    <div class="card" id="create-note-box"style="">
+      <div class="card-body" id="create-a-note">
+           <form>
+                {% csrf_token %}
+                <div class="md-form" >
+                     <div class="d-flex flex-row">
+                    <input type="text" id="txtbox" class="form-control" placeholder="Title" style="box-shadow: none;" autocomplete="off">
+                    <div class="d-flex justify-content-end" style="margin-left: 71%;">
+                        <button type="button" class="btn" id="pinned" onclick="ispinned(this)"  >
+                            <img src="/media/profile_pics/pinned.svg">
+                        </button></div>
+                     </div>
+                </div>
+
+               <div>
+
+               </div>
+                <div class="md-form">
+                    <textarea type="text" id="txtarea"  style="height: 40px;box-shadow: none;border:none "placeholder="Take a note"></textarea>
+                </div>
+
+                <div class="card-footer" id="card-footer-btn">
+
+                  <div class="btn-group">
+                  <button class="btn " type="button" id="dropdown-reminderMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span><ion-icon name="notifications"></ion-icon></span>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdown-reminderMenuButton">
+                    <h6 class="dropdown-header">Reminder</h6>
+                    <div class="dropdown-divider"></div>
+                    <form>
+                      <div class="form-group">
+                          <label class="label-control">&nbsp Date &nbsp  </label>
+                          <input type="text" class="form-control datepicker" value="10/10/2016" id="date">
+                      </div>
+                      <div class="form-group">
+                          <label class="label-control">&nbsp  Time &nbsp  </label>
+                          <input type="text" class="form-control timepicker" value="14:00">
+                      </div>
+                      <button type="sumbit" class="btn btn-light" id="save1-btn">save</button>
+                    </form>
+                  </div>
+               </div>
+
+                <button type="button"  class="btn" id="add-collaborator" >
+                    <span>
+                        <ion-icon name="person"></ion-icon>
+                    </span>
+                </button>
+
+
+                <!--<button type="button" class="btn">-->
+                    <!--<span>-->
+                       <!--<ion-icon name="color-palette"></ion-icon>-->
+                    <!--</span>-->
+                <!--</button>-->
+                <div class="btn-group">
+                <button class="btn  " type="button" id="dropdown-colorMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                  <span><ion-icon name="color-palette"></ion-icon></span>
+                </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdown-colorMenuButton">
+
+                  <div class="btn-col">
+                      <button class="btn btn-link " type="button"  name="white"  style="background-color:white" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#f28b82;"  name="#f28b82" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#fbbc04;"  name="#fbbc04" onclick="changeColor(this)"></button>
+                      <button class="btn  btn-link" type="button" style="background-color:#fff475"  name="#fff475" onclick="changeColor(this)"></button>
+                  </div>
+                  <div class="btn-col">
+                      <button class="btn btn-link" type="button" style="background-color:#ccff90;"  name="#ccff90" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#a7ffeb;"  name="#a7ffeb" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#cbf0f8;"  name="#cbf0f8" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#aeaefb ;" name="#aeaefb" onclick="changeColor(this)"></button>
+                  </div>
+                  <div class="btn-col">
+                      <button class="btn btn-link" type="button" style="background-color:#d7aefb;" name="#d7aefb" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#fdcfe8;" name="#fdcfe8" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#e6c9a8;" name="#e6c9a8" onclick="changeColor(this)"></button>
+                      <button class="btn btn-link" type="button" style="background-color:#e8eaed;" name="#e8eaed" onclick="changeColor(this)"></button>
+                  </div>
+                </div>
+                </div>
+
+
+                <!--<button type="button"  class="btn" >-->
+                    <!--<span>-->
+                        <!--<ion-icon name="images"></ion-icon>-->
+                    <!--</span>-->
+                <!--</button>-->
+                 <div class="btn btn-group image-upload ">
+                <label for="file-input" style="margin-bottom: 1%;">
+                   <span><ion-icon name="images"></ion-icon></span>
+                </label>
+
+                <input id="file-input" type="file"/>
+               </div>
+
+                <button  type="button" class="btn" id="archive" onclick="isarchive(this)">
+                    <span>
+                        <ion-icon name="archive"></ion-icon>
+                    </span>
+                </button>
+                <!--<button type="button"  class="btn">-->
+                    <!--<span>-->
+                         <!--<ion-icon name="more"></ion-icon>-->
+                    <!--</span>-->
+                <!--</button>-->
+                <div class="btn-group">
+              <button class="btn " type="button" id="dropdown-moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span><ion-icon name="more"></ion-icon></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
+                <a class="dropdown-item" href="#">Delete note</a>
+                <a class="dropdown-item" href="#">Add label</a>
+                <a class="dropdown-item" href="#">Make a copy</a>
+             </div>
+           </div>
+                <button type="button" class="btn btn-light" id="close-btn">Close</button>
+
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+
+
+<div class="create-note centered " id="collaborator" style="width: 50%;margin-left: auto;margin-right: auto;margin-top: -5%; display:none" >
+    <div class="card " id="collaborator-card" style=" box-shadow: 3px 3px 8px hsl(0, 0%, 70%);max-width: 100%; width: 90%;margin-top: 23%;">
+      <div class="card-body" id="collaborator-body">
+           <div class="d-flex flex-row">
+                  <div class="p">
+                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="Avatar" class="avatar"
+                           style="vertical-align: middle; width: 50px;height: 50px;border-radius: 50%;">
+                  </div>
+                 <div class="d-flex flex-column" style="margin-left: 5%;">
+                     <div class="p" style="width: 244%"><span style="font-weight: 700;font-size: 13px;">Rohini zade</span>
+                         <span style="font-weight: 700;font-size: 13px;"><i>(owner)</i></span></div>
+                  <div class="p" style="width: 244%"><span style="font-size: 13px;">rohinizade43@gmail.com</span></div>
+
+                </div>
+                <div class="p" style="margin-left: 45%;" >
+                    <button type="button" class="btn  btn-light" >
+                   <span><ion-icon name="close"></ion-icon></span> </button>
+                </div>
+           </div>
+
+          <div class="d-flex flex-row" style="margin-top: 2%;">
+               <div class="p">
+               <button type="button" class="btn  btn-light" id="collaborator-btn" >
+                   <span><ion-icon name="contacts"></ion-icon></span>
+               </button>
+               </div>
+
+               <div class="justify-content-lg-between" style="width: 95%;margin-top: 2%;margin-left: 5%;">
+                <input style="width: 101%;border: none;font-size: 13px"
+                       class=form-control" type="text" placeholder="Person or email to share with" aria-label="Person or email to share with" maxlength="320" role="combobox" aria-autocomplete="list" dir="ltr">
+               </div>
+          </div>
+    </div>
+    <div class="card-footer d-flex justify-content-end">
+         <button type="button" class="btn  btn-light  " id="cancel-btn" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-light " id="save-btn">Save</button>
+    </div>
+</div>
+<!--</div>-->
+<!--<div class="container-fluid " style="margin-top: 5%;">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-12  col-centered">-->
+<!--             {% block pinned-notesection %}-->
+<!--             {% endblock pinned-notesection %}-->
+<!--        </div>-->
+<!--        <div class="col-md-12  col-centered">-->
+<!--             {% block notesection %}-->
+<!--             {% endblock notesection %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+{% endblock content%}

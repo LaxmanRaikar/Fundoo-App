@@ -1,0 +1,17 @@
+<html>
+<form action="post" enctype="multipart/form-data" >
+
+     {% for note in notes %}
+    <!--{{forloop}}-->
+    {{ note }}
+    {% if forloop.first %}
+
+<input type="text" name="title">
+    {% endif %}
+     {% if forloop.last %}
+<input type="text" name="description">
+    {% endif %}
+    {% endfor%}
+<button>save</button>
+</form>
+</html>
