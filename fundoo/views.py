@@ -20,7 +20,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.models import User
-
+from .service import redis_methods
 from .models import Notes
 
 from django.contrib.auth.decorators import login_required
@@ -29,6 +29,7 @@ from django.core.cache import cache
 from django.contrib import messages
 import boto3
 import jwt
+from .decorator import my_login_required
 
 
 # from json import json_dumps
@@ -37,7 +38,7 @@ import json
 
 
 
-def user_login(request):        # this method is used to login the user
+def user_login(request, self=None):        # this method is used to login the user
     # if this is a POST request we need to process the form data
     res = {
         'message': 'Something went wrong',
@@ -46,17 +47,20 @@ def user_login(request):        # this method is used to login the user
     }
     try:
         username = request.POST.get('username')  # getting information from post method
-        if username is None:
-            raise Exception("invalid username")
+        print("mynamezscmkcnks",username)
+
+        # if username is None:
+        #     raise Exception("invalid username")
         password = request.POST.get('password')  # getting information from post method
-        if password is None:
-            raise Exception("invalid password")
+        # if password is None:
+        #     raise Exception("invalid password")
 
         user = authenticate(username=username, password=password)  # authenticating fields values
         #print('username', user)  # printing the information
         if user:  # if a valid user
             if user.is_active:  # and user is active
                 login(request, user)  # login into the page
+
                 payload = {
                     'username': username,  # payload information
                     'password': password  # payload information
@@ -64,11 +68,14 @@ def user_login(request):        # this method is used to login the user
                 # generating jwt_token using algorithm HS256
                 jwt_token = {'token': jwt.encode(payload, "secret_key", algorithm='HS256').decode()}
                 j_token = jwt_token['token']
+                redis_methods.set_token(self, 'token', j_token)
                 res['message'] = "Welcome You Are Logged Successfully.."  # printing the message
                 res['success'] = True  # initialize to True
                 cache.set('token', "token")  # printing the data in  cache set
                 res['data'] = j_token  # storing data token
                 print(res)  # printing the result
+                print('logged in----------------', redis_methods.get_token(self, 'token'))
+
 
                 # return render(request, 'fundoo/index.html', {"token": res})  # after successful login render to index.
 
@@ -307,10 +314,13 @@ def home(request):
 
     return render(request, 'notes/note_section.html', context)
 
-
+@my_login_required
 def createnote(request):
+    # print("META",request.META)
     if request.method == 'POST':
         # get username and password from submitted form
+        auth_user =request.user_id
+        print("Authentication User",auth_user)
         title = request.POST.get('title')
         print("title:", title)
         description = request.POST.get('description')
@@ -323,7 +333,8 @@ def createnote(request):
         print("image:", image)
         is_pinned = request.POST.get('is_pinned')
         print("is_pinned:", is_pinned)
-        notes = Notes(title=title, description=description, color=color, is_archived=is_archived, image=image,
+
+        notes = Notes(title=title, description=description, color=color, is_archived=is_archived, user_id=auth_user, image=image,
                       is_pinned=is_pinned)
         print(notes)
         notes.save()
