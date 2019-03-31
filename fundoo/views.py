@@ -1,3 +1,4 @@
+from email._header_value_parser import get_token
 
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render,redirect
@@ -10,6 +11,8 @@ from rest_auth.serializers import UserDetailsSerializer
 
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
+from self import self
+
 from .serializers import UserSerializer, RegistrationSerializer
 from .forms import SignUpForm
 from django.utils.encoding import force_text
@@ -30,6 +33,7 @@ from django.contrib import messages
 import boto3
 import jwt
 from .decorator import my_login_required
+from .service import redis_methods
 
 
 # from json import json_dumps
@@ -75,11 +79,13 @@ def user_login(request, self=None):        # this method is used to login the us
                 res['data'] = j_token  # storing data token
                 print(res)  # printing the result
                 print('logged in----------------', redis_methods.get_token(self, 'token'))
+                return redirect('fundoo:dashboard')
 
 
                 # return render(request, 'fundoo/index.html', {"token": res})  # after successful login render to index.
 
-                return render(request, 'fundoo/dash_board.html', {"token": res})  # after successful login render to index.
+                # return render(request, 'fundoo/dash_board.html', {"token": res})  # after successful login render to index.
+
 
             else:
                 return HttpResponse(
@@ -276,16 +282,26 @@ def abc(request):
 #     return render(request, 'fundoo/dash_board.html')
 #
 #
-# def getnotes(request, pk):
-#     if request.method == 'GET':
-#         import json
-#         #notes = Notes.objects.values_list('title', 'description').get(pk=pk)
-#         notes = Notes.objects.values_list('title', 'description').get(pk=pk)
-#         # notes = json.dumps(notes)
-#         # print(type(json.loads(notes)) )
-#         # print(notes)
-#         print(notes)
-#         return render(request, 'fundoo/abc.html', {'notes': notes})
+@my_login_required
+def getnotes(request):
+    if request.method == 'GET':
+        import json
+        #notes = Notes.objects.values_list('title', 'description').get(pk=pk)
+        token = redis_methods.get_token(self,'token')
+        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])
+        # token_decode = jwt.decode(token, os.getenv("SIGNATURE"), algorithms=['HS256'])
+        print("TOKEN DECODE", token_decode)
+        uname = token_decode.get('username')
+        user = User.objects.get(username=uname)
+        user_id = user.id  # getting user id
+        print("Laxman kjj ID", user_id)
+        request.user_id = user_id
+        notes = Notes.objects.filter(user_id =user.id)
+        # notes = json.dumps(notes)
+        # print(type(json.loads(notes)) )
+        # print(notes)
+        print("kkkkk",notes)
+        return render(request, 'fundoo/practise.html', {'notes': notes})
 #
 #
 # def delete(request, pk):
@@ -320,7 +336,7 @@ def createnote(request):
     if request.method == 'POST':
         # get username and password from submitted form
         auth_user =request.user_id
-        print("Authentication User",auth_user)
+        print("Authentication User", auth_user)
         title = request.POST.get('title')
         print("title:", title)
         description = request.POST.get('description')
@@ -343,6 +359,10 @@ def createnote(request):
     context = {  # 'title':title, # 'description':description
         'allnotes': allnotes}
     return render(request, 'fundoo/notes/note_section.html', context)
+
+
+
+
 
 
 def deletenote(request, pk):

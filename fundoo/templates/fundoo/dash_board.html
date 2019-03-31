@@ -108,14 +108,15 @@
                             <a class="nav-link " id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:200px">
                                 <!--{{ profile.image.url }}-->
 
-                              <img src= "https://i.pinimg.com/236x/ae/17/dc/ae17dcad6ee08af82e0553fc59008889--royals-we.jpg" class="rounded-circle" alt="avatar image" height="40"/>
+                              <img src= "https://s3.ap-south-1.amazonaws.com/fundooapp777/{{ user.username }}.jpg" class="rounded-circle" alt="avatar image" height="40"/>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
 
 
 
                                    <div>
-                                        <img src="https://www.logodesignlove.com/wp-content/uploads/2017/06/land-heritage-logo-together-design-01.jpg" style="width:60px;height:60px;radius:50px">
+                                       <img src= "https://s3.ap-south-1.amazonaws.com/fundooapp777/{{ user.username }}.jpg" class="rounded-circle" alt="avatar image" height="40"/>
+
                                    </div>
 
 
@@ -530,6 +531,11 @@ $(document).ready(function(){
                               {% endblock %}
                     </div>
 
+                    <div class="col-lg-12 col-centered">
+                               {% block notecontent %}
+
+                              {% endblock %}
+                    </div>
 
 
 

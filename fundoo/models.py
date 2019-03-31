@@ -44,9 +44,13 @@ class Notes(models.Model):
         return self.title
 
 
+class filepath(models.Model):
+       filename = models.CharField(max_length= 200, null=True)
 
-    def get_absolute_url(self):
-        return reverse('home')
+       def __str__(self):
+           return  self.filename
+
+
 
 
 
