@@ -16,13 +16,13 @@ urlpatterns = [
         path('index', views.index, name="index"),
         path('dash_board', views.dash_board, name="dashboard"),
         path('abc',views.abc, name='abc'),
-        path('loginn', views.user_login, name='loginn'),
+        path('login', views.user_login, name='login'),
         path('create', views.createnote, name='createnote'),
-        path('home', views.home, name='home'),
-        path('delete/<int:pk>', views.deletenote, name='delete'),
+        # path('home', views.home, name='home'),
+        path('delete/<int:pk>', views.delete, name='delete'),
         path('get',views.getnotes, name='get'),
        #  path('get/<int:pk>', views.getnotes, name='getnotes'),
-       # path('delete/<int:pk>', views.delete, name="deletenotes"),
+       path('delete/<int:pk>', views.delete, name="deletenotes"),
        #  path('update/<int:pk>', views.update, name='update'),
 
 ]

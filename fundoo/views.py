@@ -286,7 +286,7 @@ def abc(request):
 def getnotes(request):
     if request.method == 'GET':
         import json
-        #notes = Notes.objects.values_list('title', 'description').get(pk=pk)
+        # notes = Notes.objects.values_list('title', 'description').get(pk=pk)
         token = redis_methods.get_token(self,'token')
         token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])
         # token_decode = jwt.decode(token, os.getenv("SIGNATURE"), algorithms=['HS256'])
@@ -301,14 +301,16 @@ def getnotes(request):
         # print(type(json.loads(notes)) )
         # print(notes)
         print("kkkkk",notes)
-        return render(request, 'fundoo/practise.html', {'notes': notes})
+        # return render(request, 'fundoo/notes/getnote.html', {'notes': notes})
+        return render(request, 'fundoo/notes/getnote.html', {'notes':notes })
 #
 #
-# def delete(request, pk):
-#     if request.method == 'GET':
-#         notes =Notes.objects.get(pk=pk)
-#         notes.delete()
-#         return HttpResponse('DELETED')
+def delete(request, pk):
+    if request.method == 'GET':
+        notes =Notes.objects.get(pk=pk)
+        notes.delete()
+        return redirect("fundoo:get")
+
 
 #
 #
@@ -317,18 +319,20 @@ def getnotes(request):
 #         notes = Notes.objects.get(pk=pk)
 #         return render(request,'fundoo/update.html', {'notes':notes})
 
-def home(request):
-    allnotes = Notes.objects.all().order_by('-created_time')
-    # all_labels = Labels.objects.all().order_by('-created_time')
+    #
+    # def home(request):
+    #     allnotes = Notes.objects.all().order_by('-created_time')
+    #     # all_labels = Labels.objects.all().order_by('-created_time')
+    #
+    #     import pprint
+    #     pp = pprint.PrettyPrinter(indent=4)
+    #     # pp.pprint( allnotes)
+    #     context = {  # 'title':title,
+    #         # 'description':description
+    #         'allnotes': allnotes }
+    #
+    #     return render(request, 'notes/note_section.html', context)
 
-    import pprint
-    pp = pprint.PrettyPrinter(indent=4)
-    # pp.pprint( allnotes)
-    context = {  # 'title':title,
-        # 'description':description
-        'allnotes': allnotes }
-
-    return render(request, 'notes/note_section.html', context)
 
 @my_login_required
 def createnote(request):
@@ -358,11 +362,7 @@ def createnote(request):
     allnotes = Notes.objects.all().order_by('-created_time')
     context = {  # 'title':title, # 'description':description
         'allnotes': allnotes}
-    return render(request, 'fundoo/notes/note_section.html', context)
-
-
-
-
+    return render(request, 'fundoo/notes/getnote.html', context)
 
 
 def deletenote(request, pk):
@@ -373,17 +373,17 @@ def deletenote(request, pk):
         if note.trash == False:
             note.trash = True
             note.save()
-            return render(request, 'fundoo/notes/note_section.html', )
-        else:
-            note.is_deleted = True
-            # delete note
-            note.delete()
-            return redirect('show_trash')
+            return render(request, 'fundoo/notes/getnote.html', )
+        # else:
+        #     note.is_deleted = True
+        #     # delete note
+        #     note.delete()
+        #     return redirect('show_trash')
 
-    allnotes = Notes.objects.all().order_by('-created_time')
+    notes = Notes.objects.all().order_by('-created_time')
 
     context = {  # 'title':title, # 'description':description
-        'allnotes': allnotes}
+        'notes': notes}
 
     return render(request, 'notes/show_trash.html', context)
 
