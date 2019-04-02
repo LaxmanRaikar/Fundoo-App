@@ -2,8 +2,9 @@ from email._header_value_parser import get_token
 
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render,redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_auth.serializers import UserDetailsSerializer
 
@@ -256,8 +257,6 @@ def index(request):
 def dash_board(request):
     return render(request, 'fundoo/dash_board.html')
 
-def abc(request):
-    return render(request, 'fundoo/abc.html')
 
 
 
@@ -283,6 +282,7 @@ def abc(request):
 #
 #
 @my_login_required
+# @csrf_exempt
 def getnotes(request):
     if request.method == 'GET':
         import json
@@ -294,7 +294,7 @@ def getnotes(request):
         uname = token_decode.get('username')
         user = User.objects.get(username=uname)
         user_id = user.id  # getting user id
-        print("Laxman kjj ID", user_id)
+
         request.user_id = user_id
         notes = Notes.objects.filter(user_id =user.id)
         # notes = json.dumps(notes)
@@ -303,13 +303,34 @@ def getnotes(request):
         print("kkkkk",notes)
         # return render(request, 'fundoo/notes/getnote.html', {'notes': notes})
         return render(request, 'fundoo/notes/getnote.html', {'notes':notes })
-#
-#
+
 def delete(request, pk):
     if request.method == 'GET':
         notes =Notes.objects.get(pk=pk)
         notes.delete()
         return redirect("fundoo:get")
+    #
+    # def deletenote(request, pk):
+    #     if request.method == 'GET':
+    #         # get the note with requested id
+    #         note = Notes.objects.get(pk=pk)
+    #         print(note.trash)
+    #         if note.trash == False:
+    #             note.trash = True
+    #             note.save()
+    #             return render(request, 'fundoo/notes/getnote.html', )
+    #         # else:
+    #         #     note.is_deleted = True
+    #         #     # delete note
+    #         #     note.delete()
+    #         #     return redirect('show_trash')
+    #
+    #     notes = Notes.objects.all().order_by('-created_time')
+    #
+    #     context = {  # 'title':title, # 'description':description
+    #         'notes': notes}
+    #
+    #     return render(request, 'notes/show_trash.html', context)
 
 
 #
@@ -333,64 +354,80 @@ def delete(request, pk):
     #
     #     return render(request, 'notes/note_section.html', context)
 
-
+@csrf_exempt
 @my_login_required
 def createnote(request):
-    # print("META",request.META)
-    if request.method == 'POST':
-        # get username and password from submitted form
-        auth_user =request.user_id
-        print("Authentication User", auth_user)
-        title = request.POST.get('title')
-        print("title:", title)
-        description = request.POST.get('description')
-        print("description:", description)
-        color = request.POST.get('color')
-        print("color:", color)
-        is_archived = request.POST.get('is_archive')
-        print("is_archived:", is_archived)
-        image = request.POST.get('image')
-        print("image:", image)
-        is_pinned = request.POST.get('is_pinned')
-        print("is_pinned:", is_pinned)
 
-        notes = Notes(title=title, description=description, color=color, is_archived=is_archived, user_id=auth_user, image=image,
-                      is_pinned=is_pinned)
-        print(notes)
-        notes.save()
+    res ={}
+    try:
+
+        if request.method == 'POST':
+            # get username and password from submitted form
+            auth_user =request.user_id
+            print("Authentication User", auth_user)
+            title = request.POST.get('title')  # get title
+            print("title:", title)
+            description = request.POST.get('description') # get description
+            print("description:", description)
+            color = request.POST.get('color')   # get color
+            print("color:", color)
+            is_archived = request.POST.get('is_archive')
+            print("is_archived:", is_archived)
+            image = request.POST.get('image')
+            print("image:", image)
+            is_pinned = request.POST.get('is_pinned')
+            print("is_pinned:", is_pinned)
+
+            notes = Notes(title=title, description=description, color=color, is_archived=is_archived, user_id=auth_user, image=image,
+                          is_pinned=is_pinned)
+            print(notes)
+            notes.save()    # save the data
+
+        allnotes = Notes.objects.all().order_by('-created_time')
+        context = {  # 'title':title, # 'description':description
+            'allnotes': allnotes}
+        return render(request, 'fundoo/notes/getnote.html', context)
+    except Exception as e:
+        res ['message'] = 'something bad happend'
+        return JsonResponse(res, status=404)
+
+
+
+@my_login_required
+@csrf_exempt
+def delete(request, pk):
+    res = {}
+    try:
+        if request.method == 'GET':
+            notes =Notes.objects.get(pk=pk) # get the note of particular pk value
+            notes.delete()  # deletes the note
+            return redirect("fundoo:get")
+    except Exception as e:
+        res['message'] = 'something bad happend'
+        return JsonResponse(res, status=404)
+
+
+
+
+#@my_login_required
+@csrf_exempt
+def update(request, pk):
+    note = Notes.objects.get(pk=pk)
+    print(note)
+    title = request.POST['title']
+    print("my title",title)
+    description = request.POST['description']
+    # reminder = request.POST['reminder']
+
+    note.title = title
+    note.description = description
+    # note.remainder = reminder
+    note.save()
 
     allnotes = Notes.objects.all().order_by('-created_time')
     context = {  # 'title':title, # 'description':description
         'allnotes': allnotes}
     return render(request, 'fundoo/notes/getnote.html', context)
-
-
-def deletenote(request, pk):
-    if request.method == 'GET':
-        # get the note with requested id
-        note = Notes.objects.get(pk=pk)
-        print(note.trash)
-        if note.trash == False:
-            note.trash = True
-            note.save()
-            return render(request, 'fundoo/notes/getnote.html', )
-        # else:
-        #     note.is_deleted = True
-        #     # delete note
-        #     note.delete()
-        #     return redirect('show_trash')
-
-    notes = Notes.objects.all().order_by('-created_time')
-
-    context = {  # 'title':title, # 'description':description
-        'notes': notes}
-
-    return render(request, 'notes/show_trash.html', context)
-
-
-
-
-
 
 
 

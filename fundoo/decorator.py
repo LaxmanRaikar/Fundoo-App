@@ -23,5 +23,5 @@ def my_login_required(function):
         request.user_id=user_id
 
         print("***", user_id)
-        return function(request,*args ,**kwargs)
+        return function(request ,*args , **kwargs)
     return wrap

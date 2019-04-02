@@ -12,10 +12,10 @@ urlpatterns = [
         path('api/login', views.RestLogin.as_view(), name="RestLogin"),
         path('api/register', views.RegisterRapi.as_view(), name="RegisterApi"),
         url(r'^upload/$',fundoo.s3_transfer.uploadto_aws , name='upload'),
-        path('createnote', views.createnote, name="createnote"),
+        # path('createnote', views.createnote, name="createnote"),
         path('index', views.index, name="index"),
         path('dash_board', views.dash_board, name="dashboard"),
-        path('abc',views.abc, name='abc'),
+       # path('abc',views.abc, name='abc'),
         path('login', views.user_login, name='login'),
         path('create', views.createnote, name='createnote'),
         # path('home', views.home, name='home'),
@@ -23,7 +23,9 @@ urlpatterns = [
         path('get',views.getnotes, name='get'),
        #  path('get/<int:pk>', views.getnotes, name='getnotes'),
        path('delete/<int:pk>', views.delete, name="deletenotes"),
-       #  path('update/<int:pk>', views.update, name='update'),
+       path('update/<int:pk>', views.update, name='update'),
+
+
 
 ]
 

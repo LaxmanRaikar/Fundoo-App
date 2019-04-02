@@ -12,13 +12,6 @@ from django.urls import reverse
 class  UserProfileInfo(models.Model):
     user = models.CharField(max_length=30)
 
-
-
-
-
-    def __str__(self):
-        return self.user
-
     def __str__(self):
         return self.user
 

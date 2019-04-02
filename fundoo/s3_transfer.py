@@ -30,11 +30,16 @@ def uploadto_aws(request):
         file_nam = str(user)       # taking file name in string
         file_name=file_nam+".jpg"
         print("filename", file_name)
+
+        file =request.POST['filename']
+        filepath.filename=file_name
+        file.save()
+
+
         s3 = boto3.client('s3')             # using boto to upload file in aws s3 bucket
 
         s3.upload_fileobj(uploaded_file, 'fundooapp777', Key=file_name)
 
-        # filename= request.POST.get('abc')
-        # fi= filepath(filename=filename)
+
         return HttpResponse('IMAGE HAS BEEN UPLOADED')
     return render(request, 'fundoo/upload.html', {})
