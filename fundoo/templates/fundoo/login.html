@@ -1,0 +1,45 @@
+{% block body_block %}
+
+<center>
+{% if messages %}
+<p class="messages">
+{% for message in messages %}
+<p style="color:red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+{% endfor %}
+</p>
+{% endif %}
+</center>
+<body BGCOLOR="#f2efef">
+  <div class="container">
+    <div class="jumbotron">
+      <h1> <img src="https://pbs.twimg.com/profile_images/997146890058784768/a-l4aXuk_400x400.jpg"height="100" width="200">
+      </h1>
+        <center>
+<form method="post" action="{% url 'fundoo:login' %}">
+          {% csrf_token %}
+          {# A more "HTML" way of creating the login form#}
+    <h1>Fundoo app</h1>
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" placeholder="Username"><br>
+
+   <br> <label for="password">Password:</label>
+          <input type="password" name="password" placeholder="  Password"><br>
+<br> <input type="submit" name="login" value="Login"><br>
+    <br><label for="New user??">New user ?? Register Here</label>
+</form>
+        <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+    <input type="submit" name="" value="Sign up">
+
+    </form>
+                <a href="{% url 'password_reset' %}">Forgot Password ?? click here to reset</a>
+        </center>
+
+
+</div>
+
+  </div>
+
+
+{% endblock %}
+

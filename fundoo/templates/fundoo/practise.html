@@ -1,0 +1,257 @@
+  <div id="pined-note-card" class="card card-cascade" style="background-color:{{note.color}};">
+
+      <!-- Card image -->
+      {% if note.image %}
+      <div class="view view-cascade overlay" data-toggle="modal" data-target="#noteupdatemodal" id="pined-update-img">
+        <img class="card-img-top" id="pined-note-img" src="{{fundoo.note.image.url}}" >
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+      {% endif %}
+
+
+
+      <!-- Card content -->
+      <div class="card-body card-body-cascade " >
+
+           <a   style="margin-left:80%" class="btn btn-default " href="{% url 'fundoo:pinned' note.id %}">
+ab
+            </a>
+        <!--Title -->
+          <div class="d-flex flex-row">
+              <div class="p" style="width: 80%;">
+                  <a href="#">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+                   <h5 class="card-title" id="p-title"><strong>{{note.title }}</strong></h5>
+              </div>
+            </div>
+
+
+
+        <!-- Text -->
+         <p class="card-text"  data-toggle="modal" data-target="#noteupdatemodal" id="p-update-content">{{note.description}}</p>
+      </div>
+      <!--End of content section-->
+
+      <!--label section-->
+      <div class="card-label">
+          <a class="trigger info-color text-dark" >label<span><ion-icon name="close"></ion-icon></span></a>
+      </div>
+      <!--End of label section-->
+
+       <!--link section-->
+      <div class="card-link">
+
+      </div>
+      <!--End of link section-->
+
+      <!--card footer section-->
+      <div class="card-data" style="margin-left: -1%;">
+        <!--reminder button with dropdown menu-->
+        <div class="btn-group">
+              <button class="btn btn-light footer-btn " type="button" id="p-dropdown-reminderMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-placement="bottom" title="Reminder">
+                <span><ion-icon name="notifications"></ion-icon></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="p-dropdown-reminderMenuButton">
+                    <h6 class="dropdown-header">Reminder</h6>
+                    <div class="dropdown-divider"></div>
+                    <form>
+                      <div class="form-group">
+                          <label class="label-control">&nbsp Date &nbsp  </label>
+                          <input type="text" class="form-control datepicker" value="10/10/2016" id="p-date">
+                      </div>
+                      <div class="form-group">
+                          <label class="label-control">&nbsp  Time &nbsp  </label>
+                          <input type="text" class="form-control timepicker" value="14:00">
+                      </div>
+                      <button type="sumbit" class="btn btn-light" id="p-save-btn">save</button>
+                    </form>
+              </div>
+        </div>
+          <!--<a class="dropdown-item" href="#" id="setreminder"> <span><ion-icon name="alarm"></ion-icon></span> &nbsp  Pick a date & time</a>-->
+
+
+          <!-- Collaborator-->
+        <button type="button" class="btn btn-light footer-btn "  data-toggle="modal" data-target="#myModal-2"
+         data-toggle="tooltip" data-placement="bottom" title="Collaborator">
+          <span><ion-icon name="person"></ion-icon></span>
+        </button>
+
+          <div class="modal fade" id="p-myModal-2" tabindex="-1" role="dialog" aria-labelledby="p-myModalLabel-2">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" >
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="p-myModalLabel-2">Collaborators</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="d-flex flex-row">
+                          <div class="p">
+                              <!--https://pbs.twimg.com/media/CsVS813UIAA2yA5.jpg-->
+                              <img src="#" alt="Avatar" class="avatar"
+                                   style="vertical-align: middle; width: 50px;height: 50px;border-radius: 50%;">
+                          </div>
+                         <div class="d-flex flex-column" style="margin-left: 5%;">
+                             <div class="p" style="width: 244%"><span style="font-weight: 700;font-size: 13px;">LAXMAN RAIKAR</span>
+                                 <span style="font-weight: 700;font-size: 13px;"><i>(owner)</i></span></div>
+                          <div class="p" style="width: 244%"><span style="font-size: 13px;">laxmanraikar777@gmail.com</span></div>
+
+                        </div>
+                        <div class="p" style="margin-left: 35%;" >
+                            <button type="button" class="btn btn-light" >
+                           <span><ion-icon name="close"></ion-icon></span> </button>
+                        </div>
+                        </div>
+
+                        <div class="d-flex flex-row" style="margin-top: 2%;">
+                           <div class="p">
+                           <button type="button" class="btn  btn-light" id="p-collaborator-btn" >
+                               <span><ion-icon name="contacts"></ion-icon></span>
+                           </button>
+                           </div>
+
+                           <div class="justify-content-lg-between" style="width: 95%;margin-top: 2%;margin-left: 5%;">
+                            <input style="width: 101%;border: none;font-size: 13px"
+                                   class=form-control" type="text" placeholder="Person or email to share with" aria-label="Person or email to share with" maxlength="320" role="combobox" aria-autocomplete="list" dir="ltr">
+                           </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="background-color: rgba(0,0,0,0.07);">
+                        <button type="button" class="btn  btn-light footer-btn " data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-light footer-btn ">Save</button>
+                    </div>
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div><!-- modal -->
+<!--close collaborator-->
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+
+  <script>
+      function changeColor(element,id) {
+            var color=element.name
+            var id=id
+            console.log(color)
+            console.log(id)
+            $.ajax({
+              method: 'POST',
+              url: '/setcolor/',
+              data: {
+                'color': color,
+                'id':id,
+                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+              },
+              success: function(data) {
+                location.reload();
+                console.log(data)
+               <!--document.getElementById("note-card").style.backgroundColor = color-->
+              },
+              error: function(xhr, status, error) {
+                // shit happens friends!
+              }
+            });
+        }
+        function pinned(element,id) {
+            var id=id
+            console.log(id)
+            $.ajax({
+              method: 'POST',
+              url: '/ispinned/',
+              data: {
+                'id':id,
+                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+              },
+          success: function(data) {
+           console.log(data)
+           location.reload();
+          },
+          error: function(xhr, status, error) {
+            // shit happens friends!
+          }
+        });
+        }
+         function archived(element,id) {
+            var id=id
+            console.log(id)
+            $.ajax({
+            method: 'POST',
+            url: '/isarchive/',
+            data: {
+            'id':id,
+            'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+            },
+            success: function(data) {
+            console.log(data)
+             location.reload();
+            },
+            error: function(xhr, status, error) {
+            // shit happens friends!
+            }
+            });
+         }
+  </script>
+
+          <!--color button-->
+        <div class="btn-group">
+                <button class="btn" type="button" id="p-dropdown-colorMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                  <span><ion-icon name="color-palette"></ion-icon></span>
+                </button>
+                  <div class="dropdown-menu" aria-labelledby="p-dropdown-colorMenuButton">
+                      <div class="btn-col">
+                          <button class="btn btn-link " type="button"  name="white"  style="background-color:white" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#f28b82;"  name="#f28b82" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#fbbc04;"  name="#fbbc04" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn  btn-link" type="button" style="background-color:#fff475"  name="#fff475" onclick="changeColor(this,{{note.id}})"></button>
+                      </div>
+                      <div class="btn-col">
+                          <button class="btn btn-link" type="button" style="background-color:#ccff90;"  name="#ccff90" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#a7ffeb;"  name="#a7ffeb" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#cbf0f8;"  name="#cbf0f8" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#aeaefb ;" name="#aeaefb" onclick="changeColor(this,{{note.id}})"></button>
+                      </div>
+                      <div class="btn-col">
+                          <button class="btn btn-link" type="button" style="background-color:#d7aefb;" name="#d7aefb" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#fdcfe8;" name="#fdcfe8" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#e6c9a8;" name="#e6c9a8" onclick="changeColor(this,{{note.id}})"></button>
+                          <button class="btn btn-link" type="button" style="background-color:#e8eaed;" name="#e8eaed" onclick="changeColor(this,{{note.id}})"></button>
+                      </div>
+                </div>
+        </div>
+        <!--<button type="file" class="btn btn-light footer-btn "  >-->
+          <!--<span><ion-icon name="images"></ion-icon></span>-->
+        <!--</button>-->
+        <div class="btn-group image-upload btn-light footer-btn" data-toggle="tooltip" data-placement="bottom" title="Add image" style="background-color: transparent;">
+            <label for="file-input" style="margin-bottom: 1%;">
+               <span><ion-icon name="images"></ion-icon></span>
+            </label>
+            <input id="p-file-input" type="file"/>
+        </div>
+        <button type="button" class="btn btn-light footer-btn" data-toggle="tooltip" data-placement="bottom" title="Archive" onclick="archived(this,{{note.id}})" >
+          <span><ion-icon name="archive"></ion-icon></span>
+        </button>
+         <div class="btn-group">
+          <button class="btn btn-light footer-btn" type="button" id="p-dropdown-moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          data-toggle="tooltip" data-placement="bottom" title="More">
+            <span><ion-icon name="more"></ion-icon></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
+
+              <a class="dropdown-item" href="#">Update note pinned</a>
+
+            <a class="dropdown-item" href="#">Delete note pinned</a>
+            <a class="dropdown-item" href="#">Make a copy</a>
+            <a class="dropdown-item" href="#">Add label </a>
+         </div>
+         </div>
+        </div>
+  </div>
+         {% endif %}
+      {% endif %}
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock pinned-notesection %}
+
