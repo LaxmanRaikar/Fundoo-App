@@ -15,7 +15,7 @@
 
 
 
-         <link rel="stylesheet" type="text/css" href="{% static 'css/note.css' %}">
+         <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
          <link rel="stylesheet" type="text/css" href="{% static 'css/date-time-picker.css' %}">
 
          <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
@@ -41,6 +41,31 @@
          });
 
 });
+
+
+      function changeColor(element,id) {
+            var color=element.name
+            var id=id
+            console.log(color)
+            console.log(id)
+            $.ajax({
+              method: 'POST',
+              url: '/setcolor/',
+              data: {
+                'color': color,
+                'id':id,
+                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+              },
+              success: function(data) {
+                location.reload();
+                console.log(data)
+               <!--document.getElementById("note-card").style.backgroundColor = color-->
+              },
+              error: function(xhr, status, error) {
+                // shit happens friends!
+              }
+            });
+        }
 
     </script>
 
@@ -494,8 +519,6 @@ $(document).ready(function(){
 
                 <input id="file-input" type="file"/>
                </div>
-
-
                     <span>
                         <ion-icon name="archive"></ion-icon>
                     </span>
@@ -522,38 +545,25 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
-
-
                           </div>
                           </div>
                     </main>
-
-
-
     </div>
                     <div class="col-lg-12 col-centered">
-                               {% block body %}
+                        <div class="container-fluid " style="margin-top: 5%;">
+    <div class="row">
+        <div class="col-md-12  col-centered">
+             {% block pinned-notesection %}
+             {% endblock pinned-notesection %}
 
-                              {% endblock %}
+        </div>
+        <div class="col-md-12  col-centered">
+             {% block notesection %}
+             {% endblock notesection %}
+        </div>
+    </div>
+</div>
                     </div>
-
-                    <div class="col-lg-12 col-centered">
-                               {% block notecontent %}
-
-                              {% endblock %}
-                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
 <!--        <script type="text/javascript" src="{% static 'js/base.js' %}"></script>-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

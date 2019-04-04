@@ -16,6 +16,7 @@
 
 
          <link rel="stylesheet" type="text/css" href="{% static 'css/note.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/trash_note.css' %}">
          <link rel="stylesheet" type="text/css" href="{% static 'css/date-time-picker.css' %}">
 
          <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
@@ -445,6 +446,19 @@ $(document).ready(function(){
         <!-- Text -->
          <p class="card-text"  data-toggle="modal" data-target="#noteupdatemodal" id="p-update-content">{{ note.description}}</p>
       </div>
+           <div class="btn-group">
+          <button class="btn btn-light footer-btn" type="button" id="p-dropdown-moreMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          data-toggle="tooltip" data-placement="bottom" title="More">
+            <span><ion-icon name="more"></ion-icon></span>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
+
+              <a class="dropdown-item" href="{% url 'fundoo:restoretrash' note.pk %}">Restore</a>
+
+            <a class="dropdown-item" href="{% url 'fundoo:delete' note.pk %}">Delete</a>
+
+         </div>
+         </div>
 
 
 
@@ -457,14 +471,18 @@ $(document).ready(function(){
 </div>
 
 
+
+
+
+
+
 </div>
 
         </div>
 
 
-
 </div>
-
+</div>
 
 
 
@@ -480,7 +498,6 @@ $(document).ready(function(){
 </div>
 </div>
 </div>
-
 
 
     </body>

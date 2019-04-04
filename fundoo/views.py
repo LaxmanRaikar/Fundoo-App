@@ -82,7 +82,7 @@ def user_login(request, self=None):        # this method is used to login the us
                 res['data'] = j_token  # storing data token
                 print(res)  # printing the result
                 print('logged in----------------', redis_methods.get_token(self, 'token'))
-                return redirect('fundoo:dashboard')
+                return redirect('fundoo:get')
 
 
                 # return render(request, 'fundoo/index.html', {"token": res})  # after successful login render to index.
@@ -403,7 +403,7 @@ def delete(request, pk):
         if request.method == 'GET':
             notes =Notes.objects.get(pk=pk) # get the note of particular pk value
             notes.delete()  # deletes the note
-            return redirect("fundoo:get")
+            return redirect("fundoo:trashmenu")
     except Exception as e:
         res['message'] = 'something bad happend'
         return JsonResponse(res, status=404)
@@ -468,7 +468,6 @@ def trash(request,pk):
         return JsonResponse(res, status=404)
 
 
-
 def trashitem(request):
     if request.method == 'GET':
         import json
@@ -487,6 +486,33 @@ def trashitem(request):
         # print(type(json.loads(notes)) )
         # print(notes)
         print("kkkkk", notes)
+    return render(request, 'fundoo/notes/trash_note.html', {'notes': notes})
 
 
-    return render(request,'fundoo/notes/trash_note.html',{'notes': notes})
+def restore_trash(request,pk):
+    res = {}
+    try:
+        note = Notes.objects.get(pk=pk)
+        if note.trash == True:
+            note.trash = False
+            note.save()
+            return redirect('fundoo:trashmenu')
+    except Exception as e:
+        res['message'] = 'something bad happend'
+        return JsonResponse(res, status=404)
+
+# def trash(request,pk):
+#     res={}
+#     try:
+#         note =Notes.objects.get(pk=pk)
+#         if note.trash ==False:
+#             note.trash = True
+#             note.save()
+#             return redirect('fundoo:get')
+#     except Exception as e:
+#         res['message'] = 'something bad happend'
+#         return JsonResponse(res, status=404)
+
+
+
+
