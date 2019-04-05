@@ -513,7 +513,6 @@ def restore_trash(request,pk):
 #         res['message'] = 'something bad happend'
 #         return JsonResponse(res, status=404)
 
-def method(request):
-    return redirect()
+
 
 
