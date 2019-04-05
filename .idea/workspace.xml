@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da1e3915-6416-470f-b8c7-b7531afb46cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fundoo/templates/fundoo/dash_board.html" beforeDir="false" afterPath="$PROJECT_DIR$/fundoo/templates/fundoo/dash_board.html" afterDir="false" />
+    <list default="true" id="da1e3915-6416-470f-b8c7-b7531afb46cd" name="Default Changelist" comment="Changes in File">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fundoo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/fundoo/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/chardetect" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/chardetect" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/django-admin" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/django-admin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/django-admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/django-admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/dotenv" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/dotenv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/easy_install" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/easy_install" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/easy_install-3.6" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/easy_install-3.6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/jp.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/jp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/pip" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/pip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/pip3" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/pip3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/pip3.6" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/pip3.6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/pyjwt" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/pyjwt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/python" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/python" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/python3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/python3.6" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/python3.6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2html.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2html.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2html4.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2html4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2html5.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2html5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2latex.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2latex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2man.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2man.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2odt.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2odt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2odt_prepstyles.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2odt_prepstyles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2pseudoxml.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2pseudoxml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2s5.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2s5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2xetex.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2xetex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rst2xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rst2xml.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/rstpep2html.py" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/rstpep2html.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/bin/sqlformat" beforeDir="false" afterPath="$PROJECT_DIR$/new-env1/bin/sqlformat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new-env1/lib64" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/notes/getnote.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="7860">
               <caret line="524" selection-start-line="524" selection-end-line="524" />
               <folding>
                 <element signature="n#style#0;n#h6#0;n#!!top" expanded="true" />
@@ -61,7 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/notes/trash_note.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
+            <state relative-caret-position="6825">
               <caret line="455" column="82" selection-start-line="455" selection-start-column="82" selection-end-line="455" selection-end-column="82" />
               <folding>
                 <element signature="n#style#0;n#a#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -75,33 +104,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fundoo/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fundoo/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="360" column="4" selection-start-line="360" selection-start-column="4" selection-end-line="360" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/static/css/practise.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="165">
               <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
             </state>
           </provider>
@@ -116,10 +121,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/dash_board.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
+            <state relative-caret-position="195">
               <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -138,6 +143,39 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="540">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fundoo/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fundoo/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2212">
+              <caret line="516" column="20" selection-start-line="516" selection-start-column="20" selection-end-line="516" selection-end-column="20" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/static/css/update.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
@@ -149,13 +187,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fundoo/static/css/modal.css">
           <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fundoo/static/css/index.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1305" />
-          </provider>
         </entry>
       </file>
     </leaf>
@@ -207,10 +238,8 @@
         <option value="$PROJECT_DIR$/fundooApp/settings.py" />
         <option value="$PROJECT_DIR$/fundoo/s3_transfer.py" />
         <option value="$PROJECT_DIR$/fundooApp/urls.py" />
-        <option value="$PROJECT_DIR$/fundoo/urls.py" />
         <option value="$PROJECT_DIR$/fundoo/templates/fundoo/notes/trash_note.html" />
         <option value="$PROJECT_DIR$/fundoo/static/css/trash_note.css" />
-        <option value="$PROJECT_DIR$/fundoo/views.py" />
         <option value="$PROJECT_DIR$/fundoo/templates/fundoo/practise.html" />
         <option value="$PROJECT_DIR$/fundoo/static/css/note.css" />
         <option value="$PROJECT_DIR$/fundoo/static/css/getnote.css" />
@@ -219,10 +248,12 @@
         <option value="$PROJECT_DIR$/fundoo/templates/fundoo/notes/getnote.html" />
         <option value="$PROJECT_DIR$/fundoo/static/css/modal.css" />
         <option value="$PROJECT_DIR$/fundoo/templates/fundoo/dash_board.html" />
+        <option value="$PROJECT_DIR$/fundoo/urls.py" />
+        <option value="$PROJECT_DIR$/fundoo/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="67" />
     <option name="y" value="25" />
     <option name="width" value="1261" />
@@ -332,7 +363,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4975728" visible="true" weight="0.19827586" />
       <window_info id="Structure" order="1" sideWeight="0.50242716" side_tool="true" weight="0.25" />
@@ -345,7 +375,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Favorites" order="7" weight="0.32899022" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4976489" visible="true" weight="0.19543974" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.4976489" visible="true" weight="0.048859935" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5023511" side_tool="true" weight="0.30456027" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.32899022" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -382,13 +412,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/fundoo/static/js/getnote.js" />
-    <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/createnote.html" />
     <entry file="file://$PROJECT_DIR$/fundoo/s3transfer.text" />
     <entry file="file://$PROJECT_DIR$/fundoo/tests.py" />
@@ -583,9 +606,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/static/css/getnote.css">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/static/css/getnote.css" />
     <entry file="file://$PROJECT_DIR$/fundoo/static/css/date-time-picker.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-120">
@@ -621,69 +642,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="360" column="4" selection-start-line="360" selection-start-column="4" selection-end-line="360" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fundoo/static/css/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1305" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/static/css/practise.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/static/css/trash_note.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/static/css/update.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/notes/trash_note.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="455" column="82" selection-start-line="455" selection-start-column="82" selection-end-line="455" selection-end-column="82" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/notes/getnote.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="7860">
           <caret line="524" selection-start-line="524" selection-end-line="524" />
           <folding>
             <element signature="n#style#0;n#h6#0;n#!!top" expanded="true" />
@@ -722,12 +688,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fundoo/static/css/modal.css">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/notes/trash_note.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6825">
+          <caret line="455" column="82" selection-start-line="455" selection-start-column="82" selection-end-line="455" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#4;n#ul#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#2;n#div#2;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/static/css/practise.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/static/css/trash_note.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/dash_board.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
+        <state relative-caret-position="195">
           <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
@@ -740,6 +731,43 @@
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/templates/fundoo/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/static/css/update.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/static/css/modal.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fundoo/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2212">
+          <caret line="516" column="20" selection-start-line="516" selection-start-column="20" selection-end-line="516" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
           </folding>
         </state>
       </provider>
