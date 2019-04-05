@@ -22,12 +22,16 @@ urlpatterns = [
         path('delete/<int:pk>', views.delete, name='delete'),
         path('get',views.getnotes, name='get'),
        #  path('get/<int:pk>', views.getnotes, name='getnotes'),
-       # path('delete/<int:pk>', views.delete, name="deletenotes"),
+
        path('update/<int:pk>', views.update, name='update'),
         path('pinned/<int:pk>', views.pinned, name='pinned'),
         path('trash/<int:pk>', views.trash, name='trash'),
         path('trashmenu', views.trashitem, name='trashmenu'),
         path('restoretrash/<int:pk>', views.restore_trash, name='restoretrash')
+
+
+       path('delete/<int:pk>', views.delete, name="deletenotes"),
+       path('update/<int:pk>', views.update, name='update'),
 
 
 

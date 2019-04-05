@@ -31,9 +31,15 @@ def uploadto_aws(request):
         file_name=file_nam+".jpg"
         print("filename", file_name)
 
+
         # file =request.POST['filename']
         # filepath.filename=file_name
         # file.save()
+
+        file =request.POST['filename']
+        filepath.filename=file_name
+        file.save()
+
 
 
         s3 = boto3.client('s3')             # using boto to upload file in aws s3 bucket

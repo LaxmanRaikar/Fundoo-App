@@ -5,8 +5,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse, HttpResponseRedirect,JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from self import self
 
+from self import self
 
 from rest_auth.serializers import UserDetailsSerializer
 
@@ -82,7 +82,10 @@ def user_login(request, self=None):        # this method is used to login the us
                 res['data'] = j_token  # storing data token
                 print(res)  # printing the result
                 print('logged in----------------', redis_methods.get_token(self, 'token'))
+
                 return redirect('fundoo:get')
+
+                return redirect('fundoo:dashboard')
 
 
                 # return render(request, 'fundoo/index.html', {"token": res})  # after successful login render to index.
@@ -116,7 +119,9 @@ def signup(request): # this method is used to sign up
             message = render_to_string('fundoo/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
+
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).encode().decode(),
+
                 # takes user id and generates the base64 code(uidb64)
                 # Here we receive uidb64, token. By using the "urlsafe_base64_decode"
                 # we decode the base64 encoded uidb64 user id.
@@ -403,6 +408,7 @@ def delete(request, pk):
         if request.method == 'GET':
             notes =Notes.objects.get(pk=pk) # get the note of particular pk value
             notes.delete()  # deletes the note
+
             return redirect("fundoo:trashmenu")
     except Exception as e:
         res['message'] = 'something bad happend'

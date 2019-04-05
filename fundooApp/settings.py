@@ -10,18 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
 
 
-from pathlib import Path
-
-# load_dotenv(find_dotenv())
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# load_dotenv(verbose=True)
-# env_path = Path('.') / '.env'
-# load_dotenv(dotenv_path=env_path)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -190,10 +180,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 EMAIL_USE_TLS = True
-# EMAIL_HOST = os.getenv("EMAIL_HOST")
-# EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'laxmanraikar777@gmail.com'
 EMAIL_HOST_PASSWORD = 'laxman123'

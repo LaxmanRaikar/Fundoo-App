@@ -1,3 +1,4 @@
+
 {% extends "fundoo/dash_board.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
@@ -17,10 +18,38 @@
       {% if note.image %}
       <div class="view view-cascade overlay" data-toggle="modal" data-target="#noteupdatemodal" id="pined-update-img">
         <img class="card-img-top" id="pined-note-img" src="{{ fundoo.note.image.url }}" >
+
+{% extends "fundoo/notes/createnote.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!------ Include the above in your HEAD tag ---------->
+<link rel="stylesheet" type="text/css" href="{% static 'css/update.css' %}">
+ <script type="text/javascript" src="{% static 'js/update.js' %}"></script>
+
+{% block pinned-notesection %}
+<h6 style="margin-left: 22%;margin-top: 3%;font-style: oblique;">PINNED</h6>
+<div class="card-columns" id="pined_note-grid" xmlns="http://www.w3.org/1999/html">
+
+    {% for note in notes %}
+
+      {% if note.is_pinned == True %}
+          {% if note.trash != True %}
+          {% if note.is_archived != True %}
+
+    <div id="pined-note-card" class="card card-cascade" style="background-color:{{note.color}};">
+
+      <!-- Card image -->
+      {% if note.image %}
+      <div class="view view-cascade overlay" data-toggle="modal" data-target="#noteupdatemodal" id="pined-update-img">
+        <img class="card-img-top" id="pined-note-img" src="{{fundoo.note.image.url}}" >
+
         <a>
           <div class="mask rgba-white-slight"></div>
         </a>
       </div>
+
       {% endif %}
       <!-- Card content -->
       <div class="card-body card-body-cascade " >
@@ -33,6 +62,31 @@
                    <h5 class="card-title" id="p-title"><strong>{{note.title }}</strong></h5>
               </div>
             </div>
+
+
+      {% endif %}
+
+      <!-- Card content -->
+      <div class="card-body card-body-cascade " >
+        <!-- Title -->
+          <div class="d-flex flex-row">
+              <div class="p" style="width: 80%;">
+                   <h5 class="card-title" id="p-title"><strong>{{note.title }}</strong></h5>
+              </div>
+
+<!--               <div class="d-flex justify-content-end" >-->
+<!--&lt;!&ndash;                <button type="button" class="btn" id="pinned" style="margin-top: -15%;" onclick="pinned(this,{{note.id}})">&ndash;&gt;-->
+<!--&lt;!&ndash;                   &lt;!&ndash;<img src="fundoo/images/pin.png">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img src="https://previews.123rf.com/images/dxinerz/dxinerz1511/dxinerz151100970/48276012-pin-thumbtack-clip-icon-vector-image-can-also-be-used-for-material-design-suitable-for-use-on-web-ap.jpg" width="40px" height="30px">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+<!--               </div>-->
+
+            </div>
+
+
+
+
         <!-- Text -->
          <p class="card-text"  data-toggle="modal" data-target="#noteupdatemodal" id="p-update-content">{{note.description}}</p>
       </div>
@@ -97,11 +151,18 @@
                                    style="vertical-align: middle; width: 50px;height: 50px;border-radius: 50%;">
                           </div>
 
+
                          <div class="d-flex flex-column" style="margin-left: 5%;">
                              <div class="p" style="width: 244%">
                                  <span style="font-weight: 700;font-size: 13px;">abbc</span>
                                  <span style="font-weight: 700;font-size: 13px;"><i>(owner)</i></span></div>
                           <div class="p" style="width: 244%"><span style="font-size: 13px;">name</span></div>
+
+
+                         <div class="d-flex flex-column" style="margin-left: 5%;">
+                             <div class="p" style="width: 244%"><span style="font-weight: 700;font-size: 13px;">LAXMAN RAIKAR</span>
+                                 <span style="font-weight: 700;font-size: 13px;"><i>(owner)</i></span></div>
+                          <div class="p" style="width: 244%"><span style="font-size: 13px;">laxmanraikar777@gmail.com</span></div>
 
 
                         </div>
@@ -225,6 +286,11 @@
                       </div>
                 </div>
         </div>
+
+        <!--<button type="file" class="btn btn-light footer-btn "  >-->
+          <!--<span><ion-icon name="images"></ion-icon></span>-->
+        <!--</button>-->
+
         <div class="btn-group image-upload btn-light footer-btn" data-toggle="tooltip" data-placement="bottom" title="Add image" style="background-color: transparent;">
             <label for="file-input" style="margin-bottom: 1%;">
                <span><ion-icon name="images"></ion-icon></span>
@@ -241,9 +307,16 @@
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
 
+
               <a class="dropdown-item" href="#">Update note pinned</a>
 
             <a class="dropdown-item" href="{% url 'fundoo:trash' note.id %}">Delete note pinned</a>
+
+                <!--{% url 'update_note' pk=note.id %}-->
+              <a class="dropdown-item" href="#">Update note pinned</a>
+
+            <a class="dropdown-item" href="#">Delete note pinned</a>
+
             <a class="dropdown-item" href="#">Make a copy</a>
             <a class="dropdown-item" href="#">Add label </a>
          </div>
@@ -263,10 +336,16 @@
 <h6 style="margin-left: 22%;margin-top: 3%;font-style: oblique;">OTHERS</h6>
 <div class="card-columns" id="note-grid" xmlns="http://www.w3.org/1999/html">
     {% for note in notes %}
+
     {% if note.trash == False %}
       {% if note.is_pinned != True %}
          {% if note.is_archived != True %}
     <div id="note-card" class="card card-cascade" style="background-color:">
+
+      {% if note.is_pinned != True %}
+         {% if note.is_archived != True %}
+    <div id="note-card" class="card card-cascade" style="background-color:{{note.color}};">
+
       <!-- Card image -->
       {% if note.image %}
           <div class="view view-cascade overlay" data-toggle="modal" data-target="#noteupdatemodal" id="update-img">
@@ -275,10 +354,14 @@
               <div class="mask rgba-white-slight"></div>
             </a>
 
+
+
+
           </div>
       {% endif %}
       <!-- Card content -->
       <div class="card-body card-body-cascade " >
+
 <!-- <button class="submit" type="button" style="margin-left:80%;"  >-->
      <a   style="margin-left:80%" href="{% url 'fundoo:pinned' note.id %}">
      &#9906;</a>
@@ -290,6 +373,12 @@
               <div class="p" style="width: 80%;">
                    <h5 class="card-title" id="title"><strong>{{ note.title }}</strong></h5>
 
+
+
+        <!-- Title -->
+          <div class="d-flex flex-row">
+              <div class="p" style="width: 80%;">
+                   <h5 class="card-title" id="title"><strong>{{note.title }}</strong></h5>
 
               </div>
                <div class="d-flex justify-content-end" >
@@ -462,6 +551,12 @@
             });
          }
   </script>
+
+
+
+
+
+
         <div class="btn-group">
                 <button class="btn  " type="button" id="dropdown-colorMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                   <span><ion-icon name="color-palette"></ion-icon></span>
@@ -488,6 +583,11 @@
                   </div>
                 </div>
                 </div>
+
+
+
+
+
         <div class="btn-group image-upload btn-light footer-btn "data-toggle="tooltip" data-placement="bottom" title="Add image" style="background-color: transparent;">
             <label for="file-input" style="margin-bottom: 1%;">
                <span><ion-icon name="images"></ion-icon></span>
@@ -505,8 +605,56 @@
           data-toggle="tooltip" data-placement="bottom" title="More">
             <span><ion-icon name="more"></ion-icon></span>
           </button>
+
              <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
             <a class="dropdown-item" href="{% url 'fundoo:trash' note.id %}">Delete note others</a>
+
+
+
+
+
+             <div class="dropdown-menu" aria-labelledby="dropdown-moreMenuButton">
+
+
+
+
+<!--          <ul>-->
+<!--              <li>-->
+<!--              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginmodal">update123-->
+
+<!--                </button>-->
+<!--              </li>-->
+
+<!--              <div class="modal fade" role="dialog" id="loginmodal">-->
+<!--                  <div class="modal-dialog">-->
+<!--                    <div class="modal-content">-->
+<!--                        <div class="modal-header">-->
+
+<!--                            <div class="modal-body">-->
+<!--                                <div class ='form-group'>-->
+<!--                                    <input type="text" name="title" id="tittle" class="form-control" placeholder="title">-->
+<!--                                    <input type='text' name="title" class="form-control" placeholder="description">-->
+
+<!--                                        <a  class="button" href="{% url 'fundoo:update' note.id %}">done-->
+
+<!--                                        </a>-->
+
+
+
+
+
+
+
+
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+
+            <a class="dropdown-item" href="{% url 'fundoo:delete' note.id %}">Delete note others</a>
+
             <a class="dropdown-item" href="#">Make a copy</a>
             <a class="dropdown-item" href="#">Add label</a>
           </ul>
@@ -518,8 +666,16 @@
 
       {% endif %}
     {% endif %}
+
     {% endif %}
 {% endfor %}
+</div>
+</div>
+
+
+{% endfor %}
+
+
 </div>
 </div>
 
