@@ -43,8 +43,6 @@ from .service import redis_methods
 import json
 
 
-
-
 def user_login(request, self=None):        # this method is used to login the user
     # if this is a POST request we need to process the form data
     res = {
@@ -63,7 +61,7 @@ def user_login(request, self=None):        # this method is used to login the us
         #     raise Exception("invalid password")
 
         user = authenticate(username=username, password=password)  # authenticating fields values
-        #print('username', user)  # printing the information
+        # print('username', user)  # printing the information
         if user:  # if a valid user
             if user.is_active:  # and user is active
                 login(request, user)  # login into the page
@@ -83,10 +81,7 @@ def user_login(request, self=None):        # this method is used to login the us
                 print(res)  # printing the result
                 print('logged in----------------', redis_methods.get_token(self, 'token'))
                 return redirect('fundoo:get')
-
-
                 # return render(request, 'fundoo/index.html', {"token": res})  # after successful login render to index.
-
                 # return render(request, 'fundoo/dash_board.html', {"token": res})  # after successful login render to index.
 
 
@@ -104,7 +99,8 @@ def user_login(request, self=None):        # this method is used to login the us
         return render(request, 'fundoo/login.html', context=res)
 
 
-def signup(request): # this method is used to sign up
+def signup(request):
+    # this method is used to sign up
 
     if request.method == 'POST':        # post will process the form data
         form = SignUpForm(request.POST)
@@ -137,24 +133,26 @@ def signup(request): # this method is used to sign up
     return render(request, 'fundoo/signup.html', {'form': form})
 
 
-def upload_pic(request):
-
-    if request.method == 'POST':
-        uploaded_file = request.FILES['pic']
-        print(uploaded_file.name)
-        file_name=str(uploaded_file.name)
-        print(uploaded_file.size)
-        s3 = boto3.client('s3')
-        #s3.upload_file(uploaded_file, 'fundooapp777',"filename.jpg")
-        s3.upload_fileobj(uploaded_file, 'fundooapp777', Key=file_name)
-
-    return render(request, 'fundoo/upload.html', {})
+# def upload_pic(request):
+#
+#     if request.method == 'POST':
+#         uploaded_file = request.FILES['pic']
+#         print(uploaded_file.name)
+#         file_name=str(uploaded_file.name)
+#         print(uploaded_file.size)
+#         s3 = boto3.client('s3')
+#         # s3.upload_file(uploaded_file, 'fundooapp777',"filename.jpg")
+#         s3.upload_fileobj(uploaded_file, 'fundooapp777', Key=file_name)
+#
+#     return render(request, 'fundoo/upload.html', {})
 
 
 def acc_login(request):
     return render(request, 'fundoo/login.html', {})
 
+
 def activate(request, uidb64, token):
+    # this method is used to send the activation link to the respective email id
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(id=uid)
@@ -248,16 +246,100 @@ class RegisterRapi(CreateAPIView):
             return Response(res)
 
 
-
-
 def index(request):
     return render(request, 'fundoo/index.html')
 
 
-
-
 def dash_board(request):
     return render(request, 'fundoo/dash_board.html')
+
+
+
+#
+# def createnote(request):
+#     if request.method == 'POST':
+#         token = request.META.get('HTTP_AUTHORIZATION')
+#         print("dis is token",token)
+#         print(request.POST.get('title'))
+#         title = request.POST.get('title')
+#
+#         description = request.POST.get('description')
+#         color = request.POST.get('color')
+#         is_archived = request.POST.get('is_archive')
+#         image = request.POST.get('image')
+#         is_pinned = request.POST.get('is_pinned')
+#         notes = Notes(title=title, description=description, color=color, is_archived=is_archived, image=image,
+#                       is_pinned=is_pinned)
+#
+#         notes.save()
+#         print(notes)
+#
+#     return render(request, 'fundoo/notes/getnote.html')
+
+# @csrf_exempt
+def getnotes(request):
+    """this method is used to display the notes in home screen created by the respective user """
+
+    if request.method == 'GET':
+        token = redis_methods.get_token(self, 'token')
+        # gets the token from the redis cache
+        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])
+        # decodes the token
+        print("TOKEN DECODE", token_decode)
+        uname = token_decode.get('username')  # gets the user name from the token
+        user = User.objects.get(username=uname)
+        user_id = user.id  # getting user id
+        request.user_id = user_id
+        notes = Notes.objects.filter(user_id =user.id)
+        print("allmynotes", notes)
+        return render(request, 'fundoo/notes/getnote.html', {'notes': notes})
+
+
+# @my_login_required
+# def delete(request, pk):
+#     """ this method is used to delete the note"""
+#     if request.method == 'GET':
+#         notes =Notes.objects.get(pk=pk)  # gets the pk value of note
+#         notes.delete() # deletes the note by checking the pk value
+#         return redirect("fundoo:get")
+#         # redirects to  the respective page given in the code
+#
+
+@my_login_required
+def createnote(request):
+    """this method is used to create the note"""
+
+    if request.method == 'POST':
+        print("inside post create")
+        # get username and password from submitted form
+        auth_user =request.user_id
+
+        print("Authentication User", auth_user)
+        title = request.POST.get('title')  # get title
+        print("title:", title)
+        description = request.POST.get('description')  # get description
+        print("description:", description)
+        color = request.POST.get('color')  # get color
+        print("color:", color)
+        is_archived = request.POST.get('is_archive')  # get archive status
+        print("is_archived:", is_archived)
+        image = request.POST.get('image')  # get the image details
+        print("image:", image)
+        is_pinned = request.POST.get('is_pinned')  # get the pinned status
+        print("is_pinned:", is_pinned)
+        notes = Notes(title=title, description=description, color=color, is_archived=is_archived, user_id=auth_user,
+                      image=image,
+                      is_pinned=is_pinned)
+        # all details are stored in this variable
+        print(notes)
+        notes.save()  # save the data
+        allnotes = Notes.objects.all().order_by('-created_time')
+        context = {  # 'title':title, # 'description':description
+        'allnotes': allnotes}
+    return redirect("fundoo:get")
+
+
+
 
 
 
@@ -280,185 +362,69 @@ def dash_board(request):
 #         notes.save()
 #         print(notes)
 #
-#     return render(request, 'fundoo/dash_board.html')
-#
-#
-@my_login_required
-# @csrf_exempt
-def getnotes(request):
-    if request.method == 'GET':
-        import json
-        # notes = Notes.objects.values_list('title', 'description').get(pk=pk)
-        token = redis_methods.get_token(self,'token')
-        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])
-        # token_decode = jwt.decode(token, os.getenv("SIGNATURE"), algorithms=['HS256'])
-        print("TOKEN DECODE", token_decode)
-        uname = token_decode.get('username')
-        user = User.objects.get(username=uname)
-        user_id = user.id  # getting user id
+#     return render(request, 'fundoo/notes/getnote.html')
 
-        request.user_id = user_id
-        notes = Notes.objects.filter(user_id =user.id)
-        # notes = json.dumps(notes)
-        # print(type(json.loads(notes)) )
-        # print(notes)
-        print("kkkkk",notes)
-        # return render(request, 'fundoo/notes/getnote.html', {'notes': notes})
-        return render(request, 'fundoo/notes/getnote.html', {'notes':notes })
-
-def delete(request, pk):
-    if request.method == 'GET':
-        notes =Notes.objects.get(pk=pk)
-        notes.delete()
-        return redirect("fundoo:get")
-    #
-    # def deletenote(request, pk):
-    #     if request.method == 'GET':
-    #         # get the note with requested id
-    #         note = Notes.objects.get(pk=pk)
-    #         print(note.trash)
-    #         if note.trash == False:
-    #             note.trash = True
-    #             note.save()
-    #             return render(request, 'fundoo/notes/getnote.html', )
-    #         # else:
-    #         #     note.is_deleted = True
-    #         #     # delete note
-    #         #     note.delete()
-    #         #     return redirect('show_trash')
-    #
-    #     notes = Notes.objects.all().order_by('-created_time')
-    #
-    #     context = {  # 'title':title, # 'description':description
-    #         'notes': notes}
-    #
-    #     return render(request, 'notes/show_trash.html', context)
-
-
-#
-#
-# def update(request, pk):
-#     # if request.method =='POST':
-#         notes = Notes.objects.get(pk=pk)
-#         return render(request,'fundoo/update.html', {'notes':notes})
-
-    #
-    # def home(request):
-    #     allnotes = Notes.objects.all().order_by('-created_time')
-    #     # all_labels = Labels.objects.all().order_by('-created_time')
-    #
-    #     import pprint
-    #     pp = pprint.PrettyPrinter(indent=4)
-    #     # pp.pprint( allnotes)
-    #     context = {  # 'title':title,
-    #         # 'description':description
-    #         'allnotes': allnotes }
-    #
-    #     return render(request, 'notes/note_section.html', context)
 
 @csrf_exempt
-@my_login_required
-def createnote(request):
-
-    res ={}
-    try:
-
-        if request.method == 'POST':
-            # get username and password from submitted form
-            auth_user =request.user_id
-            print("Authentication User", auth_user)
-            title = request.POST.get('title')  # get title
-            print("title:", title)
-            description = request.POST.get('description') # get description
-            print("description:", description)
-            color = request.POST.get('color')   # get color
-            print("color:", color)
-            is_archived = request.POST.get('is_archive')
-            print("is_archived:", is_archived)
-            image = request.POST.get('image')
-            print("image:", image)
-            is_pinned = request.POST.get('is_pinned')
-            print("is_pinned:", is_pinned)
-
-            notes = Notes(title=title, description=description, color=color, is_archived=is_archived, user_id=auth_user, image=image,
-                          is_pinned=is_pinned)
-            print(notes)
-            notes.save()    # save the data
-
-        allnotes = Notes.objects.all().order_by('-created_time')
-        context = {  # 'title':title, # 'description':description
-            'allnotes': allnotes}
-        return render(request, 'fundoo/notes/getnote.html', context)
-    except Exception as e:
-        res ['message'] = 'something bad happend'
-        return JsonResponse(res, status=404)
-
-
-
-@my_login_required
-@csrf_exempt
 def delete(request, pk):
+    """ this method is used to delete the note"""
     res = {}
     try:
         if request.method == 'GET':
             notes =Notes.objects.get(pk=pk) # get the note of particular pk value
             notes.delete()  # deletes the note
             return redirect("fundoo:trashmenu")
+            # redirects to  the respective page given in the code
     except Exception as e:
-        res['message'] = 'something bad happend'
+        res['message'] = 'something bad happend'  # returns the responce if error occurs
         return JsonResponse(res, status=404)
-
-
-
 
 #@my_login_required
 @csrf_exempt
 def update(request, pk):
-    note = Notes.objects.get(pk=pk)
+    """ this method is used to update the note"""
+    note = Notes.objects.get(pk=pk) # gets the note of respective pk value
     print(note)
-    title = request.POST['title']
-    print("my title",title)
-    description = request.POST['description']
+    title = request.POST['title']  # posts the entered title input
+    print("my title", title)
+    description = request.POST['description'] # posts the enetered description input
     # reminder = request.POST['reminder']
-
     note.title = title
     note.description = description
     # note.remainder = reminder
     note.save()
+    # updated values are saved
 
     allnotes = Notes.objects.all().order_by('-created_time')
     context = {  # 'title':title, # 'description':description
         'allnotes': allnotes}
     return render(request, 'fundoo/notes/getnote.html', context)
 
-
-
-
-
+@login_required
 def pinned(request, pk):
+    """ this method is used to pin the note"""
     res ={}
     try:
-        note = Notes.objects.get(pk=pk)
+        note = Notes.objects.get(pk=pk)     # get the note of respective pk value
         print('MYNOTE',note)
-        if note.is_pinned == False or None:
-            note.is_pinned = True
-            note.save()
+        if note.is_pinned == False or note.is_pinned == None:  # checks the pinned status in db
+            note.is_pinned = True   # if condition is satisfies then the value is changed to true
+            note.save() # note is saved
             return redirect(reverse('fundoo:get'))
         else:
-            note.is_pinned =False
-            note.save()
+            note.is_pinned =False   # checks the pinned status in db
+            note.save()     # note  is saved
             return redirect(reverse('fundoo:get'))
     except Exception as e:
-        res['message'] = 'something bad happend'
+        res['message'] = 'something bad happend'    # returns the responce
         return JsonResponse(res, status=404)
 
 
-# this method is used to move the deleted card from dashboard to trash
-
 def trash(request,pk):
-    res={}
+    """this method is used to move the deleted card from dashboard to trash"""
+    res = {}
     try:
-        note =Notes.objects.get(pk=pk)
+        note =Notes.objects.get(pk=pk) # get the note of respective pk value
         if note.trash ==False:
             note.trash =True
             note.save()
@@ -469,34 +435,31 @@ def trash(request,pk):
 
 
 def trashitem(request):
+    """ this method is used to show the trash note cards """
     if request.method == 'GET':
-        import json
-        # notes = Notes.objects.values_list('title', 'description').get(pk=pk)
-        token = redis_methods.get_token(self, 'token')
-        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])
-        # token_decode = jwt.decode(token, os.getenv("SIGNATURE"), algorithms=['HS256'])
+        token = redis_methods.get_token(self, 'token') # gets the token from the redis cache
+        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256']) # decodes the token
         print("TOKEN DECODE", token_decode)
-        uname = token_decode.get('username')
+        uname = token_decode.get('username') # gets the username from the token
         user = User.objects.get(username=uname)
         user_id = user.id  # getting user id
-
         request.user_id = user_id
         notes = Notes.objects.filter(user_id=user.id)
-        # notes = json.dumps(notes)
-        # print(type(json.loads(notes)) )
-        # print(notes)
-        print("kkkkk", notes)
+        print("print notes", notes)
     return render(request, 'fundoo/notes/trash_note.html', {'notes': notes})
+    # renders to the respective html page
 
 
 def restore_trash(request,pk):
+    """ this method is used to restore the trash item """
     res = {}
     try:
-        note = Notes.objects.get(pk=pk)
-        if note.trash == True:
-            note.trash = False
-            note.save()
+        note = Notes.objects.get(pk=pk)  # get the note of respective pk value
+        if note.trash == True:  # checks the status of trash field in db
+            note.trash = False  # if condition satisfies value is changed to false
+            note.save()         # data is saved in db
             return redirect('fundoo:trashmenu')
+            # redirects to the respective page
     except Exception as e:
         res['message'] = 'something bad happend'
         return JsonResponse(res, status=404)
@@ -513,7 +476,87 @@ def restore_trash(request,pk):
 #         res['message'] = 'something bad happend'
 #         return JsonResponse(res, status=404)
 
-def method(request):
-    return redirect()
+
+@login_required
+def is_archive(request, pk):
+    """ this method is used to pin the note"""
+    res ={}
+    try:
+        note = Notes.objects.get(pk=pk)     # get the note of respective pk value
+        print('MYNOTE', note)
+        if note.is_archived == None or note.is_archived == False:  # checks the pinned status in db
+            note.is_archived = True   # if condition is satisfies then the value is changed to true
+            note.save() # note is saved
+            return redirect(reverse('fundoo:get'))
+        else:
+            note.is_archived =False   # checks the pinned status in db
+            note.save()     # note  is saved
+            return redirect(reverse('fundoo:get'))
+    except Exception as e:
+        res['message'] = 'something bad happend'    # returns the responce
+        return JsonResponse(res, status=404)
+
+
+
+def show_archive(request):
+    """ THIS METHOD IS USED TO DISPLAY THE ARCHIVE CARDS OF THE LOGGED IN USER """
+    if request.method == 'GET':
+        token = redis_methods.get_token(self, 'token')  # gets the token from the redis cache
+        token_decode = jwt.decode(token, 'secret_key', algorithms=['HS256'])  # decodes the token
+        print("TOKEN DECODE", token_decode)
+        uname = token_decode.get('username')  # gets the username from the token
+        user = User.objects.get(username=uname)
+        user_id = user.id  # getting user id
+        request.user_id = user_id
+        notes = Notes.objects.filter(user_id=user.id)
+        print("print notes", notes)
+    return render(request,'fundoo/notes/archive_note.html', {'notes': notes})
+
+@csrf_exempt
+def setcolor(request, pk):
+    if request.method == 'POST':
+        note = Notes.objects.get(pk=pk)
+        colour = request.post['change_color']
+        print("mycolour", colour)
+        note.color = colour
+        print(id)
+        note.save()
+        allnotes = Notes.objects.all().order_by('-created_time')
+        # all_labels = Labels.objects.all().order_by('-created_time')
+        # map_labels = MapLabel.objects.all().order_by('-created_time')
+        print(allnotes)
+    return redirect('fundoo:get')
+
+
+@login_required
+def copy_note(request, pk):
+    """ This method is used to copy the note"""
+    if request.method == 'GET':
+        # get note with given id
+        note = Notes.objects.get(pk=pk)     # gets the pk value of note
+        title = note.title      # gets the title of the note
+        color = note.color      # gets the color of the note
+        trash = note.trash      # gets the trash value of note
+        user_id =note.user_id   # gets the user id value of the note
+        is_archived = note.is_archived     # gets the is_archived status of the note
+        image = note.image      # gets the image of the note
+        is_pinned = note.is_pinned      #  gets the  is_pinned status of the note
+        # set description of requested id to new note
+        description = note.description  # gets the description of the note
+       # creates the copy  of note
+        copy = Notes(title=title, description=description, color=color, trash=trash, is_archived=is_archived,
+                        image=image, user_id=user_id, is_pinned=is_pinned,)
+        # save's newcopy to database
+        copy.save()
+        allnotes = Notes.objects.all().order_by('-created_time')
+        # all_labels = Labels.objects.all().order_by('-created_time')
+        # map_labels = MapLabel.objects.all().order_by('-created_time')
+        print(allnotes)
+    return redirect('fundoo:get')
+
+
+
+
+
 
 

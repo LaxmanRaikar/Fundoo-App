@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv, find_dotenv
 
-
-from pathlib import Path
-
-# load_dotenv(find_dotenv())
+from pathlib import *
+load_dotenv(find_dotenv())
+env_path=Path('.')/'.env'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -52,11 +52,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
     'crispy_forms'
-
-
-
 ]
 
 MIDDLEWARE = [
@@ -122,13 +118,13 @@ WSGI_APPLICATION = 'fundooApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 DATABASES = {
-'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'myproject1',
-    'USER': 'myprojectuser1',
-    'PASSWORD': 'password',
-    'HOST': 'localhost',
-    'PORT': '5432',
+    'default': {
+        'ENGINE':os.getenv("DB_ENGINE"),
+        'NAME': os.getenv("DB_NAME"),
+        'USER':os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': '',
     }
 }
 
@@ -190,13 +186,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 EMAIL_USE_TLS = True
-# EMAIL_HOST = os.getenv("EMAIL_HOST")
-# EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'laxmanraikar777@gmail.com'
-EMAIL_HOST_PASSWORD = 'laxman123'
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
@@ -205,12 +197,11 @@ CSRF_COOKIE_SECURE = False
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
-        },
-
+    'default': {
+        'BACKEND': os.getenv("BACKEND"),
+        'LOCATION': os.getenv("LOCATION"),
+        'OPTIONS': {
+            'CLIENT_CLASS': os.getenv("CLIENT_CLASS"),
+        }
     }
 }

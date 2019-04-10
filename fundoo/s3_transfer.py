@@ -8,6 +8,7 @@ from os import path
 import boto3
 import jwt
 from django.contrib.auth.models import User
+from django.contrib.sites import requests
 from django.http import HttpResponse
 from django.shortcuts import render
 from self import self
@@ -17,7 +18,7 @@ from fundoo.service import redis_methods
 
 
 def uploadto_aws(request):
-
+    """ this method is used to upload a pic aws s3 bucket"""
     if request.method == 'POST':
         uploaded_file = request.FILES['document']   # taking the file from local
         # uploaded_file = open(path, 'rb')  # image to upload with read access
@@ -28,18 +29,15 @@ def uploadto_aws(request):
         uname = token_decode.get('username')
         user = User.objects.get(username=uname)
         file_nam = str(user)       # taking file name in string
-        file_name=file_nam+".jpg"
+        file_name = file_nam+".jpg"
         print("filename", file_name)
-
-        # file =request.POST['filename']
-        # filepath.filename=file_name
-        # file.save()
-
-
         s3 = boto3.client('s3')             # using boto to upload file in aws s3 bucket
-
         s3.upload_fileobj(uploaded_file, 'fundooapp777', Key=file_name)
 
+        url = '{}/{}/{}'.format(s3.meta.endpoint_url, 'fundooapp777', file_name)
+        print("myurl",url)
+        data =filepath(filename=url)
+        data.save()
 
         return HttpResponse('IMAGE HAS BEEN UPLOADED')
     return render(request, 'fundoo/upload.html', {})

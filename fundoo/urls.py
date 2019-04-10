@@ -10,24 +10,27 @@ urlpatterns = [
         views.activate, name='activate'),
         url(r'^acc_active_sent/$', views.account_activation_sent, name='acc_active_sent'),
         path('api/login', views.RestLogin.as_view(), name="RestLogin"),
-        path('api/register', views.RegisterRapi.as_view(), name="RegisterApi"),
+        # path('api/register', views.RegisterRapi.as_view(), name="RegisterApi"),
         url(r'^upload/$',fundoo.s3_transfer.uploadto_aws , name='upload'),
-        # path('createnote', views.createnote, name="createnote"),
+        url(r'^api/register/$' ,views.RegisterRapi.as_view(), name="registerapi"),
+
         path('index', views.index, name="index"),
         path('dash_board', views.dash_board, name="dashboard"),
-       # path('abc',views.abc, name='abc'),
         path('login', views.user_login, name='login'),
         path('create', views.createnote, name='createnote'),
-        # path('home', views.home, name='home'),
         path('delete/<int:pk>', views.delete, name='delete'),
-        path('get',views.getnotes, name='get'),
+        path('get', views.getnotes, name='get'),
        #  path('get/<int:pk>', views.getnotes, name='getnotes'),
        # path('delete/<int:pk>', views.delete, name="deletenotes"),
        path('update/<int:pk>', views.update, name='update'),
         path('pinned/<int:pk>', views.pinned, name='pinned'),
         path('trash/<int:pk>', views.trash, name='trash'),
         path('trashmenu', views.trashitem, name='trashmenu'),
-        path('restoretrash/<int:pk>', views.restore_trash, name='restoretrash')
+        path('restoretrash/<int:pk>', views.restore_trash, name='restoretrash'),
+        path('is_archive/<int:pk>', views.is_archive, name='is_archive'),
+        path('setcolor/<int:pk>', views.setcolor, name='setcolor'),
+        path('archi', views.show_archive, name='myarchive'),
+        path('copynote/<int:pk>', views.copy_note, name='copynote'),
 
 
 
